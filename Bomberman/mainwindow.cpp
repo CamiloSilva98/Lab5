@@ -13,7 +13,7 @@ int rows = 13;
 int cols = 31;
 int winX = wallSize * cols;
 int winY = wallSize * rows;
-srand(static_cast<unsigned int>(time(nullptr)));
+//srand(static_cast<unsigned int>(time(nullptr)));
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -64,26 +64,26 @@ MainWindow::MainWindow(QWidget *parent)
     }
 }
 
-QPixmap breakableWallTexture("pared.png");
-
-// Generar muros rompibles aleatoriamente en los espacios libres
-for (int i = 1; i < rows - 1; ++i)
-{
-    for (int j = 1; j < cols - 1; ++j)
-    {
-        // Saltar posiciones con muros sólidos o de inicio del jugador
-        if ((i % 2 == 0) && (j % 2 == 0)) continue;
-        if ((i == 0 && j == 0) || (i == 0 && j == 1) || (i == 1 && j == 0)) continue;
-
-        // Colocar muro rompible con probabilidad de 50%
-        if (rand() % 2 == 0)
-        {  // Cambia el 2 por un número mayor para menos muros
-            QGraphicsPixmapItem *breakableWall = new QGraphicsPixmapItem(breakableWallTexture);
-            breakableWall->setPos(j * wallSize, i * wallSize);
-            scene->addItem(breakableWall);
-        }
-    }
-}
+//QPixmap breakableWallTexture("pared.png");
+//
+//// Generar muros rompibles aleatoriamente en los espacios libres
+//for (int i = 1; i < rows - 1; ++i)
+//{
+//    for (int j = 1; j < cols - 1; ++j)
+//    {
+//        // Saltar posiciones con muros sólidos o de inicio del jugador
+//        if ((i % 2 == 0) && (j % 2 == 0)) continue;
+//        if ((i == 0 && j == 0) || (i == 0 && j == 1) || (i == 1 && j == 0)) continue;
+//
+//        // Colocar muro rompible con probabilidad de 50%
+//        if (rand() % 2 == 0)
+//        {  // Cambia el 2 por un número mayor para menos muros
+//            QGraphicsPixmapItem *breakableWall = new QGraphicsPixmapItem(breakableWallTexture);
+//            breakableWall->setPos(j * wallSize, i * wallSize);
+//            scene->addItem(breakableWall);
+//        }
+//    }
+//}
 MainWindow::~MainWindow() {
     delete ui;
 }
