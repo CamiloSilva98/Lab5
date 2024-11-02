@@ -917,7 +917,7 @@ C:/Users/AsusTUF/Desktop/U/Info II/Lab5/Parctica_5/practica_5_caj/practica_5/mai
  mdp:C:/Users/AsusTUF/Desktop/U/Info II/Lab5/Parctica_5/practica_5_caj/practica_5/build/Desktop_Qt_6_7_2_llvm_mingw_64_bit-Debug/practica_5_autogen/moc_predefs.h
  mdp:C:/Users/AsusTUF/Desktop/U/Info II/Lab5/Parctica_5/practica_5_caj/practica_5/mainwindow.h
 C:/Users/AsusTUF/Desktop/U/Info II/Lab5/Parctica_5/practica_5_caj/practica_5/personaje.h
+C:/Users/AsusTUF/Desktop/U/Info II/Lab5/Parctica_5/practica_5_caj/practica_5/main.cpp
 C:/Users/AsusTUF/Desktop/U/Info II/Lab5/Parctica_5/practica_5_caj/practica_5/mainwindow.cpp
  uic:./ui_mainwindow.h
-C:/Users/AsusTUF/Desktop/U/Info II/Lab5/Parctica_5/practica_5_caj/practica_5/main.cpp
 C:/Users/AsusTUF/Desktop/U/Info II/Lab5/Parctica_5/practica_5_caj/practica_5/personaje.cpp

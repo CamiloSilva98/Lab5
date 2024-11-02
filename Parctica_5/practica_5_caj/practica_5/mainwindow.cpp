@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     scene = new QGraphicsScene(this);
 
     // Agregar la imagen de fondo como parte de la escena
-    QPixmap bk =  QPixmap("/home/craljimenez/Documents/UdeA/Laboratorios_C_plus_plus/desarrollos_Cristian/practica_5_caj/practica_5/imgs/background.png").scaled(600,600,Qt::KeepAspectRatio);
+    QPixmap bk =  QPixmap("C:/Users/AsusTUF/Desktop/U/Info II/Lab5/Parctica_5/practica_5_caj/practica_5/build/imgs/background.png").scaled(600,600,Qt::KeepAspectRatio);
     QGraphicsPixmapItem* fondo = new QGraphicsPixmapItem(bk);
     if (bk.isNull()) {
         qDebug() << "Error: No se pudo cargar la imagen del fondo.";
@@ -62,7 +62,7 @@ void MainWindow::crearEscena() {
     // Opcional: Cambiar color o textura de las paredes
     // QBrush brush(Qt::gray);  // Paredes grises
     // QBrush brush(Qt::NoBrush);  // Sin color de relleno
-    QPixmap texturaBloques("/home/craljimenez/Documents/UdeA/Laboratorios_C_plus_plus/desarrollos_Cristian/practica_5_caj/practica_5/imgs/pared_gris.png");
+    QPixmap texturaBloques("C:/Users/AsusTUF/Desktop/U/Info II/Lab5/Parctica_5/practica_5_caj/practica_5/build/imgs/pared_gris.png");
     QBrush brush(texturaBloques.scaled(20,20,Qt::KeepAspectRatio));  // Crear un pincel con la textura cargada
 
     paredSuperior->setBrush(brush);
@@ -77,10 +77,10 @@ void MainWindow::crearEscena() {
     paredIzquierda->setPen(pen);
     paredDerecha->setPen(pen);
 
-    paredSuperior->setOpacity(0); // se hacen invisibles
-    paredInferior->setOpacity(0); // se hacen invisibles
-    paredIzquierda->setOpacity(0); // se hacen invisibles
-    paredDerecha->setOpacity(0); // se hacen invisibles
+  //  paredSuperior->setOpacity(0); // se hacen invisibles
+  //  paredInferior->setOpacity(0); // se hacen invisibles
+  //  paredIzquierda->setOpacity(0); // se hacen invisibles
+  //  paredDerecha->setOpacity(0); // se hacen invisibles
 
 
 

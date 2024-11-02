@@ -1,5 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "breakwall.h"
+#include <QPixmap>
 #include <QGraphicsView>
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
@@ -13,12 +15,12 @@ int rows = 13;
 int cols = 31;
 int winX = wallSize * cols;
 int winY = wallSize * rows;
-//srand(static_cast<unsigned int>(time(nullptr)));
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    resize(winX+50, winY+50);
+    resize(winX + 50, winY + 50);
 
     QGraphicsScene *scene = new QGraphicsScene();
     scene->setSceneRect(0, 0, winX, winY);
@@ -37,7 +39,7 @@ MainWindow::MainWindow(QWidget *parent)
     topWall->setBrush(wallBrush);
     scene->addItem(topWall);
 
-    QGraphicsRectItem *bottomWall = new QGraphicsRectItem(0, winY-wallSize, winX, wallSize);
+    QGraphicsRectItem *bottomWall = new QGraphicsRectItem(0, winY - wallSize, winX, wallSize);
     bottomWall->setBrush(wallBrush);
     scene->addItem(bottomWall);
 
@@ -45,45 +47,43 @@ MainWindow::MainWindow(QWidget *parent)
     leftWall->setBrush(wallBrush);
     scene->addItem(leftWall);
 
-    QGraphicsRectItem *rightWall = new QGraphicsRectItem(winX-wallSize, 0, wallSize, winY);
+    QGraphicsRectItem *rightWall = new QGraphicsRectItem(winX - wallSize, 0, wallSize, winY);
     rightWall->setBrush(wallBrush);
     scene->addItem(rightWall);
 
     // Generar muros internos en patrón alternado
     for (int i = 1; i < rows - 1; ++i)
-    {       // Evitar las filas de los bordes
+    {   // Evitar las filas de los bordes
         for (int j = 1; j < cols - 1; ++j)
         {   // Evitar las columnas de los bordes
             if ((i % 2 == 0) && (j % 2 == 0))
-            {  // Patrón alternado
+            {   // Patrón alternado
                 QGraphicsPixmapItem *wall = new QGraphicsPixmapItem(wallTexture);
                 wall->setPos(j * wallSize, i * wallSize);
                 scene->addItem(wall);
             }
         }
     }
+
+    // Inicializar la semilla para la aleatoriedad
+    srand(static_cast<unsigned int>(time(nullptr)));
+
+    // Generar muros rompibles aleatorios
+    QPixmap breakWallTexture("pared.png");
+    for (int i = 1; i < rows - 1; ++i)
+    {
+        for (int j = 1; j < cols - 1; ++j)
+        {
+            if (!(i <= 1 && j <= 2) && (rand() % 4 == 0))
+            {   // Evitar las primeras 3 casillas y agregar aleatoriamente
+                BreakWall *breakWall = new BreakWall(breakWallTexture);
+                breakWall->setPos(j * wallSize, i * wallSize);
+                scene->addItem(breakWall);
+            }
+        }
+    }
 }
 
-//QPixmap breakableWallTexture("pared.png");
-//
-//// Generar muros rompibles aleatoriamente en los espacios libres
-//for (int i = 1; i < rows - 1; ++i)
-//{
-//    for (int j = 1; j < cols - 1; ++j)
-//    {
-//        // Saltar posiciones con muros sólidos o de inicio del jugador
-//        if ((i % 2 == 0) && (j % 2 == 0)) continue;
-//        if ((i == 0 && j == 0) || (i == 0 && j == 1) || (i == 1 && j == 0)) continue;
-//
-//        // Colocar muro rompible con probabilidad de 50%
-//        if (rand() % 2 == 0)
-//        {  // Cambia el 2 por un número mayor para menos muros
-//            QGraphicsPixmapItem *breakableWall = new QGraphicsPixmapItem(breakableWallTexture);
-//            breakableWall->setPos(j * wallSize, i * wallSize);
-//            scene->addItem(breakableWall);
-//        }
-//    }
-//}
 MainWindow::~MainWindow() {
     delete ui;
 }
