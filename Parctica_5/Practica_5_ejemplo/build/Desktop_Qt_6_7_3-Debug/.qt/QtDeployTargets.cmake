@@ -1,2 +1,0 @@
-set(__QT_DEPLOY_TARGET_Practica_5_ejemplo_FILE /home/craljimenez/Documents/UdeA/Laboratorios_C_plus_plus/desarrollos_Cristian/Practica_5_ejemplo/build/Desktop_Qt_6_7_3-Debug/Practica_5_ejemplo)
-set(__QT_DEPLOY_TARGET_Practica_5_ejemplo_TYPE EXECUTABLE)

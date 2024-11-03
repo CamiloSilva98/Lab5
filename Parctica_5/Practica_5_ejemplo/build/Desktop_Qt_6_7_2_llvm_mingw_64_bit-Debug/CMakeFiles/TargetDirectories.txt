@@ -1,9 +1,0 @@
-C:/Users/AsusTUF/Desktop/U/Info II/Lab5/Parctica_5/Practica_5_ejemplo/build/Desktop_Qt_6_7_2_llvm_mingw_64_bit-Debug/CMakeFiles/Practica_5_ejemplo.dir
-C:/Users/AsusTUF/Desktop/U/Info II/Lab5/Parctica_5/Practica_5_ejemplo/build/Desktop_Qt_6_7_2_llvm_mingw_64_bit-Debug/CMakeFiles/edit_cache.dir
-C:/Users/AsusTUF/Desktop/U/Info II/Lab5/Parctica_5/Practica_5_ejemplo/build/Desktop_Qt_6_7_2_llvm_mingw_64_bit-Debug/CMakeFiles/rebuild_cache.dir
-C:/Users/AsusTUF/Desktop/U/Info II/Lab5/Parctica_5/Practica_5_ejemplo/build/Desktop_Qt_6_7_2_llvm_mingw_64_bit-Debug/CMakeFiles/list_install_components.dir
-C:/Users/AsusTUF/Desktop/U/Info II/Lab5/Parctica_5/Practica_5_ejemplo/build/Desktop_Qt_6_7_2_llvm_mingw_64_bit-Debug/CMakeFiles/install.dir
-C:/Users/AsusTUF/Desktop/U/Info II/Lab5/Parctica_5/Practica_5_ejemplo/build/Desktop_Qt_6_7_2_llvm_mingw_64_bit-Debug/CMakeFiles/install/local.dir
-C:/Users/AsusTUF/Desktop/U/Info II/Lab5/Parctica_5/Practica_5_ejemplo/build/Desktop_Qt_6_7_2_llvm_mingw_64_bit-Debug/CMakeFiles/install/strip.dir
-C:/Users/AsusTUF/Desktop/U/Info II/Lab5/Parctica_5/Practica_5_ejemplo/build/Desktop_Qt_6_7_2_llvm_mingw_64_bit-Debug/CMakeFiles/Practica_5_ejemplo_autogen_timestamp_deps.dir
-C:/Users/AsusTUF/Desktop/U/Info II/Lab5/Parctica_5/Practica_5_ejemplo/build/Desktop_Qt_6_7_2_llvm_mingw_64_bit-Debug/CMakeFiles/Practica_5_ejemplo_autogen.dir
