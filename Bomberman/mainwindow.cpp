@@ -33,22 +33,49 @@ MainWindow::MainWindow(QWidget *parent)
     view->setBackgroundBrush(QBrush(QColor("#009400")));
     setCentralWidget(view);
 }
-    void MainWindow::crearMurosRompibles()
-    {
-        QPixmap breakWallTexture("pared.png");
-        srand(static_cast<unsigned int>(time(nullptr))); // Inicializar aleatoriedad
+void MainWindow::crearMurosRompibles()
+{
+    QPixmap breakWallTexture("pared.png");
 
-        for (int i = 1; i < rows - 1; ++i) {
-            for (int j = 1; j < cols - 1; ++j) {
-                // Evitar las primeras casillas y agregar muros rompibles aleatoriamente
-                if (!(i <= 1 && j <= 2) && (rand() % 4 == 0)) {
+    for (int i = 1; i < rows - 1; ++i)
+    {
+        for (int j = 1; j < cols - 1; ++j)
+        {
+            // Evitar las primeras casillas donde empieza el personaje
+            if ((i <= 2 && j <= 2))
+            {
+                continue;
+            }
+
+            // Colocar muro rompible en posiciones que no sean de la malla de muros indestructibles
+            if ((i % 2 != 0 || j % 2 != 0))
+            {
+                // Verificar si ya hay un muro indestructible en esta posición
+                QPointF position(j * wallSize, i * wallSize);
+                QList<QGraphicsItem*> itemsEnPosicion = scene->items(position);
+
+                bool posicionOcupada = false;
+                for (QGraphicsItem* item : itemsEnPosicion)
+                {
+                    if (item->data(0).toString() == "pared" && item->data(1).toString() == "indestructible") {
+                        posicionOcupada = true;
+                        break;
+                    }
+                }
+
+                // Si la posición está libre, agregar un muro rompible
+                if (!posicionOcupada && (rand() % 4 == 0))
+                {
                     BreakWall *breakWall = new BreakWall(breakWallTexture);
-                    breakWall->setPos(j * wallSize, i * wallSize);
+                    breakWall->setPos(position);
+                    breakWall->setData(0, "pared");
+                    breakWall->setData(1, "rompible");
                     scene->addItem(breakWall);
                 }
             }
         }
     }
+}
 
     void MainWindow::crearEscena()
     {
@@ -60,18 +87,22 @@ MainWindow::MainWindow(QWidget *parent)
 
         // Muros del borde
         QGraphicsRectItem *topWall = new QGraphicsRectItem(0, 0, winX, wallSize);
+        topWall->setData(0, "pared");
         topWall->setBrush(wallBrush);
         scene->addItem(topWall);
 
         QGraphicsRectItem *bottomWall = new QGraphicsRectItem(0, winY - wallSize, winX, wallSize);
+        bottomWall->setData(0, "pared");
         bottomWall->setBrush(wallBrush);
         scene->addItem(bottomWall);
 
         QGraphicsRectItem *leftWall = new QGraphicsRectItem(0, 0, wallSize, winY);
+        leftWall->setData(0, "pared");
         leftWall->setBrush(wallBrush);
         scene->addItem(leftWall);
 
         QGraphicsRectItem *rightWall = new QGraphicsRectItem(winX - wallSize, 0, wallSize, winY);
+        rightWall->setData(0, "pared");
         rightWall->setBrush(wallBrush);
         scene->addItem(rightWall);
 
@@ -84,13 +115,14 @@ MainWindow::MainWindow(QWidget *parent)
                 { // Patrón alternado
                     QGraphicsPixmapItem *wall = new QGraphicsPixmapItem(wallTexture);
                     wall->setPos(j * wallSize, i * wallSize);
+                    wall->setData(0, "pared");
                     scene->addItem(wall);
                 }
             }
         }
-    crearMurosRompibles();
+    //crearMurosRompibles();
     Personaje* personaje = new Personaje();
-    personaje->setPos(16, 16);
+    personaje->setPos(wallSize+1, wallSize+1 );
     scene->addItem(personaje);
     }
 

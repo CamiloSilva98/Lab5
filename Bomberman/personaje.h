@@ -15,10 +15,18 @@ public:
 
     // Método para manejar el movimiento del personaje
     void keyPressEvent(QKeyEvent* event);
+    QRectF boundingRect() const override;
 
 private:
-    QPixmap sprite1;  // Primera imagen del personaje
-    QPixmap sprite2;  // Segunda imagen del personaje
+    QPixmap sprite1;
+    QPixmap arriba1;
+    QPixmap arriba2;
+    QPixmap abajo1;
+    QPixmap abajo2;
+    QPixmap derecha1;
+    QPixmap derecha2;
+    QPixmap izquierda1;
+    QPixmap izquierda2;
     bool usandoSprite1;  // Controla cuál sprite está usando el personaje
 };
 

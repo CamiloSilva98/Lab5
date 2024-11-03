@@ -4,68 +4,46 @@
 #include <QGraphicsItem>
 Personaje::Personaje()
 {
-    //: usandoSprite1(true)
-    // Cargar las dos imágenes del personaje
-    sprite1 = QPixmap("PersonajeQ.png");  // Ruta a la primera imagen
-    sprite2 = QPixmap("PersonajeD.png");  // Ruta a la segunda imagen
-
+    sprite1 = QPixmap("PersonajeQ.png");
+    abajo1 = QPixmap("PersonajeD.png");
+    abajo2 = QPixmap("PersonajeDD.png");
+    izquierda1 = QPixmap("PersonajeL.png");
+    izquierda2= QPixmap("PersonajeLL.png");
+    derecha1= QPixmap("PersonajeR.png");
+    derecha2 = QPixmap("PersonajeRR.png");
+    arriba1 = QPixmap("PersonajeU.png");
+    arriba2 = QPixmap("PersonajeUU.png");
     // Si las imágenes no se cargan correctamente, imprime un mensaje de error
-    if (sprite1.isNull() || sprite2.isNull())
+    if (sprite1.isNull() || abajo1.isNull())
     {
         qDebug() << "Error: No se pudo cargar una o ambas imágenes del personaje";
     }
     // Inicialmente mostrar la primera imagen
     setPixmap(sprite1);
     usandoSprite1 = true;  // Empieza usando la primera imagen
-
+    setShapeMode(QGraphicsPixmapItem::BoundingRectShape);
     // Hacer que el personaje pueda recibir eventos de teclado
     setFlag(QGraphicsItem::ItemIsFocusable);
     setFocus();
 }
-
-void Personaje::cambiarSprite() {
+QRectF Personaje::boundingRect() const
+{
+    return QRectF(1, 1, pixmap().width() - 2, pixmap().height() - 2);
+}
+void Personaje::cambiarSprite()
+    {
     // Alternar entre las dos imágenes para simular el movimiento
     if (usandoSprite1) {
-        setPixmap(sprite2);
+        setPixmap(abajo1);
     } else {
         setPixmap(sprite1);
     }
     usandoSprite1 = !usandoSprite1;  // Alternar el estado
 }
 
-// Funcion movimiento
-// void Personaje::keyPressEvent(QKeyEvent* event) {
-//     // Mover el personaje dependiendo de la tecla presionada
-//     switch (event->key()) {
-//     case Qt::Key_Left:
-//         setPos(x() - 10, y());
-//         cambiarSprite();  // Cambiar el sprite al moverse
-//         break;
-//     case Qt::Key_Right:
-//         setPos(x() + 10, y());
-//         cambiarSprite();  // Cambiar el sprite al moverse
-//         break;
-//     case Qt::Key_Up:
-//         setPos(x(), y() - 10);
-//         cambiarSprite();  // Cambiar el sprite al moverse
-//         break;
-//     case Qt::Key_Down:
-//         setPos(x(), y() + 10);
-//         cambiarSprite();  // Cambiar el sprite al moverse
-//         break;
-//     case Qt::Key_Escape:
-//         qDebug() << "Se presionó ESC. Cerrando la aplicación...";
-//         QApplication::quit();  // Cerrar la aplicación
-//     default:
-//         break;
-//     }
-// }
-
-// Funcion para que no se salga de delimitadores.
 void Personaje::keyPressEvent(QKeyEvent* event)
 {
-    int stepSize = 8;  // Tamaño del paso en píxeles, ajustado al tamaño de los bloques
-
+    int stepSize = 4;  // Tamaño del paso en píxeles
     // Guardar la posición actual del personaje
     QPointF nuevaPos = pos();
     QPointF pos_original = nuevaPos;
@@ -104,7 +82,6 @@ void Personaje::keyPressEvent(QKeyEvent* event)
     {
         if (item->data(0).toString() == "pared")
         {
-            item->setOpacity(1.0); // se hacen visibles las pareced
             colisionConPared = true;
             break;
         }
