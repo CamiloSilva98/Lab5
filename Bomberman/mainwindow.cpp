@@ -25,7 +25,6 @@ MainWindow::MainWindow(QWidget *parent)
 
     scene = new QGraphicsScene(this);
     crearEscena();
-    QGraphicsScene *scene = new QGraphicsScene();
 
     scene->setSceneRect(0, 0, winX, winY);
 
@@ -90,10 +89,11 @@ MainWindow::MainWindow(QWidget *parent)
             }
         }
     crearMurosRompibles();
-    }
     Personaje* personaje = new Personaje();
     personaje->setPos(16, 16);
     scene->addItem(personaje);
+    }
+
 MainWindow::~MainWindow()
 {
     delete ui;

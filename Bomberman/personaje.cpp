@@ -64,7 +64,7 @@ void Personaje::cambiarSprite() {
 // Funcion para que no se salga de delimitadores.
 void Personaje::keyPressEvent(QKeyEvent* event)
 {
-    int stepSize = 16;  // Tamaño del paso en píxeles, ajustado al tamaño de los bloques
+    int stepSize = 8;  // Tamaño del paso en píxeles, ajustado al tamaño de los bloques
 
     // Guardar la posición actual del personaje
     QPointF nuevaPos = pos();
