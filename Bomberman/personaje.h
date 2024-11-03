@@ -11,22 +11,14 @@ public:
     Personaje();  // Constructor para cargar las imágenes del personaje
 
     // Método para cambiar el sprite (imagen) del personaje
-    void cambiarSprite();
+    void cambiarSprite(const QString& direccion);
 
     // Método para manejar el movimiento del personaje
     void keyPressEvent(QKeyEvent* event);
     QRectF boundingRect() const override;
 
 private:
-    QPixmap sprite1;
-    QPixmap arriba1;
-    QPixmap arriba2;
-    QPixmap abajo1;
-    QPixmap abajo2;
-    QPixmap derecha1;
-    QPixmap derecha2;
-    QPixmap izquierda1;
-    QPixmap izquierda2;
+    QPixmap sprite1, arriba1, arriba2, abajo1, abajo2, derecha1, derecha2, izquierda1, izquierda2;
     bool usandoSprite1;  // Controla cuál sprite está usando el personaje
 };
 

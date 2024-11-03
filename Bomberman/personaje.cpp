@@ -14,7 +14,8 @@ Personaje::Personaje()
     arriba1 = QPixmap("PersonajeU.png");
     arriba2 = QPixmap("PersonajeUU.png");
     // Si las imágenes no se cargan correctamente, imprime un mensaje de error
-    if (sprite1.isNull() || abajo1.isNull())
+    if (sprite1.isNull() || abajo1.isNull() || abajo2.isNull() || izquierda1.isNull() || izquierda2.isNull()
+        ||derecha1.isNull() || derecha2.isNull() || arriba1.isNull() || arriba2.isNull())
     {
         qDebug() << "Error: No se pudo cargar una o ambas imágenes del personaje";
     }
@@ -28,10 +29,10 @@ Personaje::Personaje()
 }
 QRectF Personaje::boundingRect() const
 {
-    return QRectF(1, 1, pixmap().width() - 2, pixmap().height() - 2);
+   return QRectF(1, 1, pixmap().width() - 2, pixmap().height() - 2);
 }
 void Personaje::cambiarSprite()
-    {
+{
     // Alternar entre las dos imágenes para simular el movimiento
     if (usandoSprite1) {
         setPixmap(abajo1);
@@ -40,10 +41,9 @@ void Personaje::cambiarSprite()
     }
     usandoSprite1 = !usandoSprite1;  // Alternar el estado
 }
-
 void Personaje::keyPressEvent(QKeyEvent* event)
 {
-    int stepSize = 4;  // Tamaño del paso en píxeles
+    int stepSize = 16;  // Tamaño del paso en píxeles
     // Guardar la posición actual del personaje
     QPointF nuevaPos = pos();
     QPointF pos_original = nuevaPos;
@@ -92,7 +92,6 @@ void Personaje::keyPressEvent(QKeyEvent* event)
     {
         qDebug() << "Colisión detectada con una pared";
         setPos(pos_original);  // Revertir el movimiento
-
     }
     else
     {
