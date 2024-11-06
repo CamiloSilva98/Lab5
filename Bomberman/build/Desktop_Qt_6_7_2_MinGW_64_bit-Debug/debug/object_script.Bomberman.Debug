@@ -1,0 +1,10 @@
+debug/bomb.o
+debug/breakwall.o
+debug/door.o
+debug/enemigo.o
+debug/main.o
+debug/mainwindow.o
+debug/personaje.o
+debug/moc_bomb.o
+debug/moc_enemigo.o
+debug/moc_mainwindow.o

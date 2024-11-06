@@ -1,0 +1,10 @@
+release/bomb.o
+release/breakwall.o
+release/door.o
+release/enemigo.o
+release/main.o
+release/mainwindow.o
+release/personaje.o
+release/moc_bomb.o
+release/moc_enemigo.o
+release/moc_mainwindow.o

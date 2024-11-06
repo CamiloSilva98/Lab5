@@ -18,8 +18,8 @@ public:
     QRectF boundingRect() const override;
 
 private:
-    QPixmap sprite1, arriba1, arriba2, abajo1, abajo2, derecha1, derecha2, izquierda1, izquierda2;
-    bool usandoSprite1;  // Controla cuál sprite está usando el personaje
+    QPixmap quieto, arriba1, arriba2, abajo1, abajo2, derecha1, derecha2, izquierda1, izquierda2;
+    bool usandoSprite1;
 };
 
 #endif // PERSONAJE_H
