@@ -51,10 +51,15 @@ void Personaje::colocarBomba()
 
     bombaActual = new Bomb();
     bombaActual->setPos(this->pos()); // Colocar bomba en la posición actual del personaje
-    if (scene()) {
+    //bombaActual->setData(0, "pared");
+    if (scene())
+    {
         scene()->addItem(bombaActual);  // Agrega la bomba a la escena
         qDebug() << "Bomba creada en la posición:" << bombaActual->pos();
-    } else {
+        connect(bombaActual, &Bomb::explotar, this, &Personaje::manejarExplosion);
+    }
+    else
+    {
         qDebug() << "Error: La escena es nula, no se puede añadir la bomba.";
     }
 
@@ -70,11 +75,6 @@ void Personaje::manejarExplosion()
     QPointF bombaPos = bombaActual->pos();
     int explosionRadius = 16; // Radio de explosión
 
-    // Eliminar la bomba de la escena
-    scene()->removeItem(bombaActual);
-    delete bombaActual;
-    bombaActual = nullptr;
-
     // Destruir muros rompibles en el área de explosión
     QList<QGraphicsItem*> items = scene()->items();
     for (QGraphicsItem* item : items) {
@@ -84,6 +84,7 @@ void Personaje::manejarExplosion()
             qAbs(item->y() - bombaPos.y()) <= explosionRadius) {
             scene()->removeItem(item);
             delete item;
+            bombaActual = nullptr;
         }
     }
 }

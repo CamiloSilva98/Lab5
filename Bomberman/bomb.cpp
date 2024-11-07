@@ -40,14 +40,13 @@ void Bomb::animarExplosion() {
     if (explosionIndex < explosionSprites.size()) {
         // Cambiar al siguiente sprite de explosión
         setPixmap(explosionSprites[explosionIndex]);
+       // setPixmap->setPos(this->pos());
         explosionIndex++;
-    } else {
+    }
+    else
+    {
         // Detener la animación y eliminar la bomba de la escena
         explosionTimer->stop();
-        if (scene()) {
-            scene()->removeItem(this);
-        }
-        // Eliminar la bomba de la escena
         if (scene())
         {
             scene()->removeItem(this);
