@@ -2,8 +2,9 @@
 #include "bomb.h"
 #include <QGraphicsScene>
 #include <QObject>
+#include <QDebug>
 // Constructor que carga todos los sprites
-Personaje::Personaje()
+Personaje::Personaje() : bombaActual(nullptr)
 {
     quieto = QPixmap("PersonajeQ.png");
     abajo1 = QPixmap("PersonajeD.png");
@@ -49,56 +50,43 @@ void Personaje::colocarBomba()
     if (bombaActual != nullptr) return;
 
     bombaActual = new Bomb();
-    auto items = scene->items();
-    if (!items.isEmpty()) {
-        Personaje *personaje = dynamic_cast<Personaje*>(items.back());
-        if (personaje) {
-            bombaActual->setPos(personaje->pos());
-            scene->addItem(bombaActual);
-            qDebug() << "Bomba creada en la posición:" << bombaActual->pos();
-        } else {
-            qDebug() << "No se pudo obtener el personaje. Verifica que el objeto en la escena es de tipo Personaje.";
-        }
+    bombaActual->setPos(this->pos()); // Colocar bomba en la posición actual del personaje
+    if (scene()) {
+        scene()->addItem(bombaActual);  // Agrega la bomba a la escena
+        qDebug() << "Bomba creada en la posición:" << bombaActual->pos();
     } else {
-        qDebug() << "La escena no contiene elementos.";
+        qDebug() << "Error: La escena es nula, no se puede añadir la bomba.";
     }
 
-    // Conectar la señal de explosión al slot manejarExplosion
-    connect(bombaActual, &Bomb::explotar, this, &MainWindow::manejarExplosion);
+    // Conectar la señal de explosión de la bomba a manejarExplosion en Personaje
+    connect(bombaActual, &Bomb::explotar, this, &Personaje::manejarExplosion);
+
+    qDebug() << "Bomba creada en la posición:" << bombaActual->pos();
 }
 void Personaje::manejarExplosion()
 {
     if (bombaActual == nullptr) return;  // Asegurarse de que la bomba exista
 
     QPointF bombaPos = bombaActual->pos();
-    int explosionRadius = 16;
+    int explosionRadius = 16; // Radio de explosión
 
     // Eliminar la bomba de la escena
-    scene->removeItem(bombaActual);
+    scene()->removeItem(bombaActual);
     delete bombaActual;
     bombaActual = nullptr;
 
     // Destruir muros rompibles en el área de explosión
-    QList<QGraphicsItem*> items = scene->items();
+    QList<QGraphicsItem*> items = scene()->items();
     for (QGraphicsItem* item : items) {
         // Verificar si el item está en el radio de la explosión
         if (item->data(1).toString() == "rompible" &&
             qAbs(item->x() - bombaPos.x()) <= explosionRadius &&
             qAbs(item->y() - bombaPos.y()) <= explosionRadius) {
-            scene->removeItem(item);
+            scene()->removeItem(item);
             delete item;
         }
     }
 }
-//void Personaje::colocarBomba() {
-//    Bomb* bomba = new Bomb();
-//    bomba->setPos(this->x(), this->y());
-//    scene()->addItem(bomba);
-//
-//    // Conectar la señal de explosión de la bomba a cualquier método de Personaje que maneje los efectos de la explosión
-//    connect(bomba, &Bomb::explotar, this, &Personaje::manejarExplosion);
-//}
-// Cambia el sprite del personaje dependiendo de la dirección
 void Personaje::cambiarSprite(const QString& direccion)
 {
     if (direccion == "abajo") {
@@ -140,6 +128,9 @@ void Personaje::keyPressEvent(QKeyEvent* event)
     case Qt::Key_Down:
         nuevaPos.setY(nuevaPos.y() + stepSize);
         direccion = "abajo";
+        break;
+    case Qt::Key_X:
+        colocarBomba();
         break;
     case Qt::Key_Escape:
         QApplication::quit();

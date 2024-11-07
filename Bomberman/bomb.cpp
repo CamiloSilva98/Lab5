@@ -1,10 +1,16 @@
 #include "bomb.h"
 #include <QPixmap>
 #include <QGraphicsScene>
+#include <QDebug>
 Bomb::Bomb()
 {
     // Cargar la imagen de la bomba
-    setPixmap(QPixmap("bomb.png"));
+    if (!QPixmap("bomb.png").isNull()) {
+        setPixmap(QPixmap("bomb.png"));
+        qDebug() << "Bomba: Imagen cargada correctamente.";
+    } else {
+        qDebug() << "Error: No se pudo cargar la imagen de la bomba.";
+    }
 
     // Configurar el temporizador para la explosión
     timer = new QTimer(this);

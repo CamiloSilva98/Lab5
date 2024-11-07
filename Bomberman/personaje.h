@@ -1,33 +1,39 @@
 #ifndef PERSONAJE_H
 #define PERSONAJE_H
 
+#include "bomb.h"
 #include <QGraphicsPixmapItem>
 #include <QKeyEvent>
 #include <QApplication>
-#include <QDebug>
 #include <QTimer>
 #include <QObject>
-class Personaje : public QObject, public QGraphicsPixmapItem {
-Q_OBJECT
+
+class Personaje : public QObject, public QGraphicsPixmapItem
+{
+    Q_OBJECT
 public:
-    Personaje();  // Constructor para cargar las imágenes del personaje
-
-    // Método para cambiar el sprite (imagen) del personaje
-    void cambiarSprite(const QString& direccion);
-
-    // Método para manejar el movimiento del personaje
-    void keyPressEvent(QKeyEvent* event);
+    Personaje();  // Constructor
+    void colocarBomba();  // Método para colocar una bomba
     QRectF boundingRect() const override;
-    void morir();
-    void animarMuerte();
-    void colocarBomba();
-    void manejarExplosion();
+public slots:
+    void manejarExplosion();  // Slot para manejar la explosión de la bomba
+    void animarMuerte();  // Slot para la animación de muerte
+
+protected:
+    void keyPressEvent(QKeyEvent* event) override;
+
 private:
-    QPixmap quieto, arriba1, arriba2, abajo1, abajo2, derecha1, derecha2, izquierda1, izquierda2, muerte1,
-        muerte2, muerte3, muerte4, muerte5, muerte6, muerte7;
+    void cambiarSprite(const QString& direccion);
+    void morir();
+
+    // Sprites para el personaje
+    QPixmap quieto, abajo1, abajo2, izquierda1, izquierda2, derecha1, derecha2, arriba1, arriba2;
+    QPixmap muerte1, muerte2, muerte3, muerte4, muerte5, muerte6, muerte7;
+
     bool usandoSprite1;
     int indiceMuerte;
-    Bomb *bombaActual;
+
+    Bomb* bombaActual;
 };
 
 #endif // PERSONAJE_H
