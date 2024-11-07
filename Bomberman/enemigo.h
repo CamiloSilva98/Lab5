@@ -17,7 +17,7 @@ public:
 public slots:
     void mover();
 private:
-    int dx = -5;  // Velocidad en el eje x
+    int dx = -3;  // Velocidad en el eje x
     int dy = 0;   // Velocidad en el eje y
 };
 

@@ -23,6 +23,7 @@ private:
     QTimer *explosionTimer;  // Temporizador para animar la explosión
     QVector<QPixmap> explosionSprites;  // Sprites de la explosión
     int explosionIndex;
+    QPointF explosionCenter;
 };
 
 #endif // BOMB_H

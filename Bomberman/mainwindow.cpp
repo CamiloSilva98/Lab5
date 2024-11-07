@@ -67,6 +67,7 @@ void MainWindow::crearEnemigos(int cantidadEnemigos)
             Enemigo *enemigo = new Enemigo();
             enemigo->setPos(posicionEnemigo);
             enemigo->setData(0, "daño");
+            enemigo->setData(1, "rompible");
             scene->addItem(enemigo);
             enemigosCreados++;
 
@@ -173,6 +174,7 @@ void MainWindow::crearEscena()
     Personaje* personaje = new Personaje();
     personaje->setPos(wallSize + 1, wallSize + 1);
     scene->addItem(personaje);
+    personaje->setData(1, "rompible");
     crearEnemigos(5);
 }
 

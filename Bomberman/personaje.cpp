@@ -73,7 +73,7 @@ void Personaje::manejarExplosion()
     if (bombaActual == nullptr) return;  // Asegurarse de que la bomba exista
 
     QPointF bombaPos = bombaActual->pos();
-    int explosionRadius = 16; // Radio de explosión
+    int explosionRadius = 48; // Radio de explosión
 
     // Destruir muros rompibles en el área de explosión
     QList<QGraphicsItem*> items = scene()->items();
@@ -81,7 +81,9 @@ void Personaje::manejarExplosion()
         // Verificar si el item está en el radio de la explosión
         if (item->data(1).toString() == "rompible" &&
             qAbs(item->x() - bombaPos.x()) <= explosionRadius &&
-            qAbs(item->y() - bombaPos.y()) <= explosionRadius) {
+            qAbs(item->y() - bombaPos.y()) <= explosionRadius)
+        {
+            morir();
             scene()->removeItem(item);
             delete item;
             bombaActual = nullptr;
@@ -183,7 +185,7 @@ void Personaje::morir()
     // Crear un temporizador para controlar la animación de muerte
     QTimer *timer = new QTimer(this);
     connect(timer, &QTimer::timeout, this, &Personaje::animarMuerte);
-    timer->start(100); // Cambia el sprite cada 100 ms (ajusta según la velocidad deseada)
+    timer->start(300); // Cambia el sprite cada 100 ms (ajusta según la velocidad deseada)
 }
 void Personaje::animarMuerte()
 {
