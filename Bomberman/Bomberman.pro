@@ -15,7 +15,8 @@ SOURCES += \
     enemigo.cpp \
     main.cpp \
     mainwindow.cpp \
-    personaje.cpp
+    personaje.cpp \
+    poder.cpp
 
 HEADERS += \
     bomb.h \
@@ -23,7 +24,8 @@ HEADERS += \
     door.h \
     enemigo.h \
     mainwindow.h \
-    personaje.h
+    personaje.h \
+    poder.h
 
 FORMS += \
     mainwindow.ui
