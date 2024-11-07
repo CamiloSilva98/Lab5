@@ -12,29 +12,16 @@ Enemigo::Enemigo(QGraphicsItem *parent) : QGraphicsPixmapItem(parent) {
     connect(timer, &QTimer::timeout, this, &Enemigo::mover);
     timer->start(50); // Cambia el valor para ajustar la frecuencia de movimiento
 
-    QTimer *timerCambioDireccion = new QTimer(this);
-    connect(timerCambioDireccion, &QTimer::timeout, this, &Enemigo::cambiarDireccionAleatoria);
-    timerCambioDireccion->start(200);
 }
 QRectF Enemigo::boundingRect() const
 {
     return QRectF(1, 1, pixmap().width() - 2, pixmap().height() - 2);
 }
 
-void Enemigo::cambiarDireccionAleatoria()
-{
-    if(D)
-    {
-        setPos(x() + dx, y());
-    }
-    else
-    {
-        setPos(x(), y() + dy);
-
-    }
-}
 void Enemigo::mover()
-    {
+{
+    // Mueve el enemigo en la dirección definida por dx y dy
+    setPos(x() + dx, y() + dy);
 
     // Verificar colisiones
     QList<QGraphicsItem*> collidingItemsList = collidingItems();
@@ -50,8 +37,6 @@ void Enemigo::mover()
             break;  // Salir del bucle si ya encontró un muro
         }
     }
-
-    // Verifica si el enemigo salió de la escena, y elimínalo si es necesario
     if (pos().x() + pixmap().width() < 0) {
         scene()->removeItem(this);
         delete this;

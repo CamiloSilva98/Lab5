@@ -1864,17 +1864,10 @@ release/mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		C:/Qt/6.7.2/mingw_64/include/QtCore/qbasictimer.h \
 		C:/Qt/6.7.2/mingw_64/include/QtGui/QKeyEvent \
 		ui_mainwindow.h \
-		C:/Qt/6.7.2/mingw_64/include/QtCore/QVariant \
-		C:/Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
-		C:/Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
-		C:/Qt/6.7.2/mingw_64/include/QtWidgets/QMenuBar \
-		C:/Qt/6.7.2/mingw_64/include/QtWidgets/qmenubar.h \
-		C:/Qt/6.7.2/mingw_64/include/QtWidgets/qmenu.h \
-		C:/Qt/6.7.2/mingw_64/include/QtWidgets/QStatusBar \
-		C:/Qt/6.7.2/mingw_64/include/QtWidgets/qstatusbar.h \
-		C:/Qt/6.7.2/mingw_64/include/QtWidgets/QWidget \
 		../../breakwall.h \
 		../../personaje.h \
+		C:/Qt/6.7.2/mingw_64/include/QtWidgets/QApplication \
+		C:/Qt/6.7.2/mingw_64/include/QtWidgets/qapplication.h \
 		../../door.h \
 		C:/Qt/6.7.2/mingw_64/include/QtGui/QPixmap \
 		../../enemigo.h \
