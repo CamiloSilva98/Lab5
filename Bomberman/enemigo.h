@@ -16,11 +16,10 @@ public:
 
 public slots:
     void mover();
-
+    void cambiarDireccionAleatoria();
 private:
     int dx = -5;  // Velocidad en el eje x
-    int dy = 0;   // Velocidad en el eje y
+    int dy = -5;   // Velocidad en el eje y
 };
 
 #endif // ENEMIGO_H
-

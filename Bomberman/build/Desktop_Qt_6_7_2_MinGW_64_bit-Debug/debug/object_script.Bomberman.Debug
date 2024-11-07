@@ -8,3 +8,4 @@ debug/personaje.o
 debug/moc_bomb.o
 debug/moc_enemigo.o
 debug/moc_mainwindow.o
+debug/moc_personaje.o

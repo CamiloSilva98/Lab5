@@ -19,6 +19,9 @@ void Bomb::detonar() {
     emit explotar();
 
     // Eliminar la bomba de la escena
-    scene()->removeItem(this);
+    if (scene())
+    {
+        scene()->removeItem(this);
+    }
     delete this;
 }

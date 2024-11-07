@@ -21,7 +21,7 @@ int winX = wallSize * cols;
 int winY = wallSize * rows;
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow), bombaActual(nullptr)
+    : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     resize(winX + 50, winY + 50);
@@ -66,6 +66,7 @@ void MainWindow::crearEnemigos(int cantidadEnemigos)
             // Si la posición es válida, crea y agrega el enemigo
             Enemigo *enemigo = new Enemigo();
             enemigo->setPos(posicionEnemigo);
+            enemigo->setData(0, "daño");
             scene->addItem(enemigo);
             enemigosCreados++;
 
@@ -73,62 +74,7 @@ void MainWindow::crearEnemigos(int cantidadEnemigos)
         }
     }
 }
-void MainWindow::keyPressEvent(QKeyEvent *event)
-{
-    if (event->key() == Qt::Key_X)
-    {
-        colocarBomba();
-        qDebug() << "bomba";
-    }
-    QMainWindow::keyPressEvent(event);
-}
-void MainWindow::colocarBomba()
-{
-    // Asegurarse de que no haya una bomba activa
-    if (bombaActual != nullptr) return;
 
-    bombaActual = new Bomb();
-    auto items = scene->items();
-    if (!items.isEmpty()) {
-        Personaje *personaje = dynamic_cast<Personaje*>(items.back());
-        if (personaje) {
-            bombaActual->setPos(personaje->pos());
-            scene->addItem(bombaActual);
-            qDebug() << "Bomba creada en la posición:" << bombaActual->pos();
-        } else {
-            qDebug() << "No se pudo obtener el personaje. Verifica que el objeto en la escena es de tipo Personaje.";
-        }
-    } else {
-        qDebug() << "La escena no contiene elementos.";
-    }
-
-    // Conectar la señal de explosión al slot manejarExplosion
-    connect(bombaActual, &Bomb::explotar, this, &MainWindow::manejarExplosion);
-}
-void MainWindow::manejarExplosion()
-{
-    if (bombaActual == nullptr) return;  // Asegurarse de que la bomba exista
-
-    QPointF bombaPos = bombaActual->pos();
-    int explosionRadius = wallSize * 2;  // Radio de 2 celdas en cada dirección
-
-    // Eliminar la bomba de la escena
-    scene->removeItem(bombaActual);
-    delete bombaActual;
-    bombaActual = nullptr;
-
-    // Destruir muros rompibles en el área de explosión
-    QList<QGraphicsItem*> items = scene->items();
-    for (QGraphicsItem* item : items) {
-        // Verificar si el item está en el radio de la explosión
-        if (item->data(1).toString() == "rompible" &&
-            qAbs(item->x() - bombaPos.x()) <= explosionRadius &&
-            qAbs(item->y() - bombaPos.y()) <= explosionRadius) {
-            scene->removeItem(item);
-            delete item;
-        }
-    }
-}
 void MainWindow::crearMurosRompibles()
 {
     QPixmap breakWallTexture("pared.png");
@@ -171,7 +117,8 @@ void MainWindow::crearMurosRompibles()
                     scene->addItem(muroRompiblePuerta);
                 }
                 // Para las demás posiciones, agregar muros rompibles de forma aleatoria
-                else if (rand() % 4 == 0) {
+                else if (rand() % 4 == 0)
+                {
                     BreakWall* breakWall = new BreakWall(breakWallTexture);
                     breakWall->setPos(position);
                     breakWall->setData(0, "pared");
@@ -182,7 +129,6 @@ void MainWindow::crearMurosRompibles()
         }
     }
 }
-
 void MainWindow::crearEscena()
 {
     scene->setSceneRect(0, 0, winX, winY);
@@ -223,10 +169,7 @@ void MainWindow::crearEscena()
             }
         }
     }
-
     crearMurosRompibles();
-
-    // Crear y añadir al personaje
     Personaje* personaje = new Personaje();
     personaje->setPos(wallSize + 1, wallSize + 1);
     scene->addItem(personaje);

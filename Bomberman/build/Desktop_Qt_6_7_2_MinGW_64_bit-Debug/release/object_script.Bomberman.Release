@@ -8,3 +8,4 @@ release/personaje.o
 release/moc_bomb.o
 release/moc_enemigo.o
 release/moc_mainwindow.o
+release/moc_personaje.o
